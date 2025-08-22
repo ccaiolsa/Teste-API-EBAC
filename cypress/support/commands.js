@@ -1,28 +1,20 @@
-Cypress.Commands.add('token', (email, senha) => {
+Cypress.Commands.add('login', (email, senha) => {
     cy.request({
         method: 'POST',
         url: 'login',
-        body: {
-            "email": email,
-            "password": senha 
+        body:
+        {
+        "email": email,
+        "password": senha
         }
-    }).then((response) => {
-        expect(response.status).to.equal(200)
-        return response.body.authorization
     })
- })
+})
 
- Cypress.Commands.add('cadastrarProduto' , (token, produto, preco, descricao, quantidade) =>{
+Cypress.Commands.add('identidade', (metodo, endpoint) => {
     cy.request({
-        method: 'POST', 
-        url: 'produtos',
-        headers: {authorization: token}, 
-        body: {
-            "nome": produto,
-            "preco": preco,
-            "descricao": descricao,
-            "quantidade": quantidade
-          }, 
-          failOnStatusCode: false
+        method: metodo,
+        url: endpoint
+    }).then((response) => {
+        return response.body.usuarios[response.body.usuarios.length - 1]._id;
     })
- })
+})
