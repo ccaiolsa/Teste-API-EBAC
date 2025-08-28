@@ -71,7 +71,7 @@ describe('Testes da Funcionalidade Usuários', () => {
   });
 
   it('Deve deletar um usuário previamente cadastrado', () => {
-    cy.identidade('GET', 'usuarios').then((_id) => {
+    cy.usuarioTemporario('Sicrano da Silva', 'sicrano@qa.com', 'teste').then((_id) => {
       id =_id;
       cy.request({
         method: 'DELETE',
